@@ -35,12 +35,16 @@ class Tw2Gif:
         return re.split(r'\/', url)[-1]
 
     def download_gif(self, url, path='./'):
+        """
+        Parses tweet to get mp4 video url and transforms it using FFMPEG script
+        """
+        print('Downloading gif...')
         tweet_id = self.get_tweet_id(url)
         tweet = self.api.GetStatus(tweet_id).AsDict()
         url = self.get_video_url(tweet)
 
         if not url:
-            raise Exception('No URL found in this tweet :(')
+            raise Exception('No video URL found in this tweet :(')
 
         req = requests.get(url)
         mp4_file = "aux-{}.mp4".format(tweet_id)
@@ -54,4 +58,6 @@ class Tw2Gif:
 
         if result == 0:
             print('Gif succesfully created')
+        else:
+            print('Ups, something went wrong :(')
 
