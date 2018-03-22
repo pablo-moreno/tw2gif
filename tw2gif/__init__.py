@@ -4,8 +4,8 @@ from tw2gif.tw2gif import Tw2Gif
 import click
 
 @click.command()
-@click.option('--url', help='Post a tweet')
-@click.option('--path', help='Post a tweet')
+@click.option('--url', help='Tweet URL')
+@click.option('--path', help='Output file path')
 def main(url, path):
     if not url:
         print('Ups, you didn\'t especified any tweet url... :/ ')
